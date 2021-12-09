@@ -1,4 +1,4 @@
-import pyodbc 
+# import pyodbc 
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 from pandas import DataFrame
