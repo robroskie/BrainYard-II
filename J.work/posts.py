@@ -353,13 +353,13 @@ def get_topWords( dataframe, topN):
     
     #clean tags now holds all the tags that have been processed
     #We strip all the non-essential punctuation
-    cleanTags = [re.sub(r"[^a-zA-Z0-9:$-,%.?!]+", ' ', str(new)) for new in tags]
+    cleanTags = [re.sub(r"[^a-zA-Z0-9:$,%.?!]+", ' ', str(new)) for new in tags]
     
     corpus = ""
     for e in cleanTags:
         corpus += (e + " ")
     
-    stopwords = ["on", "the", "services", "objective", "framework", "iphone", "visual", "studio", "arrays", "server", "web", ".net","angular", "data", "string", "file", "core", "cloud", "testing", "vba", "wpf", "image", "native", "postgresql","forms"]
+    stopwords = ["on", "the", "services", "objective", "framework", "iphone", "arrays", "web", ".net","angular", "data", "string", "file", "core", "cloud", "testing", "vba", "wpf", "image", "native", "postgresql","forms"]
     
     corpus = remove_white(corpus)
     corpus = word_tokenize(corpus)
@@ -388,7 +388,7 @@ def clean_tokenize( tag ):
     '''
     
     
-    cleantag = re.sub(r"[^a-zA-Z0-9:$-,%.?!]+", ' ', str(tag))
+    cleantag = re.sub(r"[^a-zA-Z0-9:$,%.?!]+", ' ', str(tag))
     cleantags = word_tokenize(cleantag)
     cleantags_withoutNumbers = [word for word in cleantags if not any(c.isdigit() for c in word)]
     return cleantags_withoutNumbers
@@ -445,9 +445,11 @@ def load_clean_A( dataF ):
     from nltk.sentiment import SentimentIntensityAnalyzer
     sia = SentimentIntensityAnalyzer() 
     
+    import comDefs as cd
+    
     indrange = dataF.index
 
-    df2 = pd.DataFrame(columns = ['Text', 'neg', 'neu', 'pos'])
+    df2 = pd.DataFrame(columns = ['Text', 'neg', 'neu', 'pos', 'Answer Type'])
     
     for e in range(len(dataF.index)):
         #Clean will return our text body cleaned 
@@ -456,10 +458,12 @@ def load_clean_A( dataF ):
         #We can now analyze sentiment
         score = sia.polarity_scores(ee)
         
-        #we generate our tags based on top 50
+        #Answer type will be included in this set
+        #import comDefs python file
+        atype = cd.Comment_Type( ee )
         
     
-        df2 = df2.append({'Text': ee, 'neg':score['neg'], 'neu':score['neu'], 'pos':score['pos']}, ignore_index=True)
+        df2 = df2.append({'Text': ee, 'neg':score['neg'], 'neu':score['neu'], 'pos':score['pos'], 'Answer Type':atype}, ignore_index=True)
         
     
     merged = pd.merge(dataF, df2, left_index=True, right_index=True)
