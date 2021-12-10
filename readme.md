@@ -49,19 +49,21 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-For our project we scraped data from Stack Overflow. We downloaded pre-scraped data, availabile here:
+For our project we scraped data from Stack Overflow and performed multiple analyses on it. Language processing was used to explore trends in the popularity of computer languages and topics, as well as to identify the sentiment of users, on Stack Overflow over time. <br>
+The second part of our project involved using Linear Discriminant and Cosine Similarity analysis to identify and predict the topics of user entered text and recommend similar questions.   
+
+
+## Dataset
+We downloaded pre-scraped data, available here:
+
+
 * https://www.brentozar.com/archive/2015/10/how-to-download-the-stack-overflow-database-via-bittorrent/
 
 
+We first attempted to scrape the data directly using the Stack Overflow API. However due to query limits, it was decided that starting with the above dataset would be much faster. After downloading the dataset, it was loaded into a local Microsoft SQL database so that it could be queried directly from the Python working environment.<br>
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
-Use the `BLANK_README.md` to get started.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -69,11 +71,9 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
+The data processing was done in Python using Jupyter Notebook. The topic/similar question predictor part of the project was built as a simple Flask application and then integrated into Tableau. The actual visualization of the data is presented in Tableau.<br>
+The following Python libraries were used in performing the language processing and analysis:
+* [Python]()
 * [Angular](https://angular.io/)
 * [Svelte](https://svelte.dev/)
 * [Laravel](https://laravel.com)
