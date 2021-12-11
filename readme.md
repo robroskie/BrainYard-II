@@ -49,7 +49,20 @@ This is an example of how you may give instructions on setting up your project l
 
 
 ## Project part II - Question and Topic Predictor
-buildLDAModel.ipynb contains the code needed to build an LDA model based on the scraped question text data. The following calls the methods needed to process the text and prepare a set of tokens for the dictionary:
+### Usage
+In order to access the question analyzer, ensure all dependencies are installed and then type:
+```sh
+python app.py
+```
+And navigate to<br> http://127.0.0.1:5000/
+
+### Topic Predictor
+
+```sh
+buildLDAModel.ipynb 
+```
+Contains the code needed to build an LDA model based on the scraped question text data.<br>
+The following calls the methods needed to process the text and prepare a set of tokens for the dictionary:
   ```sh
 for key in dict:
     tokens = tokenizeText(dict[key]['Text'])
@@ -109,6 +122,58 @@ Printing this gives:
 (13, '0.066*"product" + 0.059*"query"')
 (1, '0.065*"width" + 0.063*"color"')
   ```
+
+```sh
+applyLDAModel.ipynb 
+```
+Contains the code needed to build load and run the built LDA model. <br>
+
+Next potential topics manually considered and assigned to each of the pairs of two topic words.
+```shl 
+    list_of_keywords[1] = [word_pairs_cleaned[0], 'CSS Styling']
+    list_of_keywords[4] = [word_pairs_cleaned[1], 'Server testing']
+    list_of_keywords[6] = [word_pairs_cleaned[2], 'Arrays and lists']
+    list_of_keywords[7] = [word_pairs_cleaned[3], 'Functions, methods and variables']
+    list_of_keywords[8] = [word_pairs_cleaned[4], 'Files']
+    list_of_keywords[9] = [word_pairs_cleaned[5], 'System task management']
+    list_of_keywords[10] = [word_pairs_cleaned[6], 'JAVA developement']
+    list_of_keywords[11] = [word_pairs_cleaned[7], 'Android view class']
+    list_of_keywords[12] = [word_pairs_cleaned[8], 'Accessing and declaring variables']
+    list_of_keywords[13] = [word_pairs_cleaned[9], 'Database queries']
+    list_of_keywords[14] = [word_pairs_cleaned[10], 'Static and dynamic binding']
+    list_of_keywords[15] = [word_pairs_cleaned[11], 'Verson and builds']
+    list_of_keywords[16] = [word_pairs_cleaned[12], 'HTML elements']
+    list_of_keywords[17] = [word_pairs_cleaned[13], 'Types of images']
+    list_of_keywords[18] = [word_pairs_cleaned[14], 'Protocol/network stacks']
+    list_of_keywords[19] = [word_pairs_cleaned[15], 'HTTP and TCP/IP']
+    list_of_keywords[21] = [word_pairs_cleaned[16], 'Software models and development life cycle']
+    list_of_keywords[22] = [word_pairs_cleaned[17], 'Primitive and reference data types']
+    list_of_keywords[23] = [word_pairs_cleaned[18], 'Application tags and metadata']
+    list_of_keywords[24] = [word_pairs_cleaned[19], 'HTML elements']
+```
+So for example 'width' and 'color' from above were decided to be related to 'CSS styling.' 
+
+This script is run by calling the getTopics function and passing in the text for which you want the top three topics identified for based on the LDA model. The text is cleaned using the same steps as in the buildLDAModel document. Dataframes can also be handled instead of strings by calling the preapareTextDf method.<br>
+
+In the case of a dataframe, the LDA model is applied to each row:
+```sh
+df['Body_processed_topics_sorted'] = df.apply(lambda x: sorterTopThree(x['Body_processed_topics']), axis=1)
+```
+And then the top three topics are saved to the dataframe:
+```sh
+df['Body_processed_topics_sorted'] = df.apply(lambda x: sorterTopThree(x['Body_processed_topics']), axis=1)
+```
+Which was then saved as a new .csv file so that the results could analyzed. 
+```sh
+qdataCombined.to_csv("FinalData\\qdataCombined.csv", encoding="utf-8")
+```
+
+
+### Similar Question Predictor
+
+
+
+
 
 
 ### Prerequisites
