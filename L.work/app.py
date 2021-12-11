@@ -1,10 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import time
-import pyodbc 
 import applyLDAModel as p
-# import cosinesimilarity as csim
+import cosinesimilarity as csim
 
 app = Flask(__name__)
 
@@ -27,15 +25,10 @@ def result():
 
     rs = p.getTopics(user_input)
     
-    # csSim = csim.getCSim(user_input)
-
-    # print('csSim')
-    # print(csSim)
-    csSim = 'sdaf'
+    csSim = csim.getCSim(user_input)
+    print('csSim')
+    print(csSim)
     return render_template("result.html", input = user_input, value1 = rs, value2 = csSim)
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

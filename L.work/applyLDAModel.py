@@ -136,11 +136,22 @@ def getTopics(user_input):
 
     to_return = []
     
+    # for match in matches:
+    #     temp = list(match)
+    #     if(temp[0]):
+    #         if(match[1] > 0.1):
+    #             to_return.append(list_of_keywords[match[0]][1])
+
+
+
+   
     for match in matches:
         temp = list(match)
-        if(temp[0]):
-            if(match[1] > 0.1):
-                to_return.append(list_of_keywords[match[0]][1])
+        if(list_of_keywords[temp[0]]):
+                if(temp[1] > 0.1):
+                    to_return.append(list_of_keywords[temp[0]][1])
+
+    
 
 
     return to_return
@@ -187,15 +198,14 @@ def prepareTextDf(df):
     df = df.drop(labels=['Body_processed_topics', 'Body_processed_topics_sorted'], axis=1)
     return df
 
-print(getTopics('Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn'))
+# print(getTopics('Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn'))
 
-df = pd.read_csv('FinalData/qdata.csv', encoding='utf-8')
-print(prepareTextDf(df.head(100)))
+# df = pd.read_csv('FinalData/qdata.csv',encoding='utf-8')
 
 # Apply LDA model to each row in body and store results as a new column
-qdataCombined = pd.read_csv("FinalData\\qdata.csv")
+# qdataCombined = pd.read_csv("FinalData\\qdata.csv")
 
-qdataCombined = prepareTextDf(qdataCombined.head(100))
-print(qdataCombined['Body_processed_topics_words_final'])
+# qdataCombined = prepareTextDf(qdataCombined.head(100))
+# print(qdataCombined['Body_processed_topics_words_final'])
 
 # qdataCombined.to_csv("FinalData\\qdataCombined.csv", encoding="utf-8")
