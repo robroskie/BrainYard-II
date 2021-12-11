@@ -18,37 +18,9 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
 For our project we scraped data from Stack Overflow and performed multiple analyses on it. Language processing was used to explore trends in the popularity of computer languages and topics, as well as to identify the sentiment of users, on Stack Overflow over time. <br>
 The second part of our project involved using Linear Discriminant and Cosine Similarity analysis to identify and predict the topics of user entered text and recommend similar questions.   
 
@@ -63,40 +35,87 @@ We downloaded pre-scraped data, available here:
 We first attempted to scrape the data directly using the Stack Overflow API. However due to query limits, it was decided that starting with the above dataset would be much faster. After downloading the dataset, it was loaded into a local Microsoft SQL database so that it could be queried directly from the Python working environment.<br>
 
 
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-### Built With
-
+## Built With
 The data processing was done in Python using Jupyter Notebook. The topic/similar question predictor part of the project was built as a simple Flask application and then integrated into Tableau. The actual visualization of the data is presented in Tableau.<br>
 The following Python libraries were used in performing the language processing and analysis:
-* [Python]()
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+* [NLTK](https://www.nltk.org/)
+* [Gensim](https://radimrehurek.com/gensim/)
+* [Pickle](https://docs.python.org/3/library/pickle.html#module-pickle)
+* [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)
 
 
-
-<!-- GETTING STARTED -->
-## Getting Started
-
+## Project part I - Language Analysis 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+
+
+## Project part II - Question and Topic Predictor
+buildLDAModel.ipynb contains the code needed to build an LDA model based on the scraped question text data. The following calls the methods needed to process the text and prepare a set of tokens for the dictionary:
+  ```sh
+for key in dict:
+    tokens = tokenizeText(dict[key]['Text'])
+    tokens = removeFirstLastThree(tokens)
+    tokens = toLowerCase(tokens)
+    tokens = removeStopWords(tokens)
+    tokens = applyPStemmer(tokens)
+    tokens = get_lemma(tokens)
+  ```
+
+Then we create create a dictionary for the text tokens and save it so that it can be reused:
+  ```sh
+dict = corpora.Dictionary(text_tokens)
+dict.save('dictionary.gensim')
+  ```
+This dictionary is then used to create a bag of words model which is also saved:
+  ```sh
+bagOfWords = [dict.doc2bow(t) for t in text_tokens]
+pickle.dump(bagOfWords, open('corpus.pkl', 'wb'))
+  ```
+Then the actual LDA model can be generated and saved. The number of topics, passes and words was varied and the following provided good results: 
+
+```shl 
+NUM_TOPICS = 25
+NUM_WORDS = 2
+
+lda model = gensim.models.ldamodel.LdaModel(corpus, num_topics = NUM_TOPICS, id2word=dictionary, passes=15)
+ldamodel.save('models/lda_model.model')
+  ```
+Once the LDA model is built and saved, it can be loaded and run as follows:
+```shl 
+ldamodel =  models.LdaModel.load('models/lda_model.model')
+topics = ldamodel.print_topics(num_words=NUM_WORDS)
+  ```
+Where NUM_WORDS gives the number of words in each of the NUM_TOPICS that the model identifies 
+
+Printing this gives:
+```shl 
+(12, '0.192*"self" + 0.026*"let"')
+(8, '0.118*"file" + 0.038*"line"')
+(17, '0.115*"image" + 0.046*"category"')
+(16, '0.107*"div" + 0.103*"class"')
+(10, '0.084*"string" + 0.075*"public"')
+(22, '0.058*"int" + 0.034*"array"')
+(23, '0.237*"app" + 0.076*"tag"')
+(15, '0.037*"version" + 0.030*"build"')
+(14, '0.139*"property" + 0.047*"binding"')
+(7, '0.067*"function" + 0.057*"var"')
+(24, '0.022*"strong" + 0.019*"like"')
+(19, '0.102*"http" + 0.073*"com"')
+(18, '0.072*"stack" + 0.070*"http"')
+(4, '0.032*"server" + 0.028*"test"')
+(11, '0.192*"android" + 0.049*"view"')
+(21, '0.115*"model" + 0.079*"date"')
+(9, '0.033*"task" + 0.032*"system"')
+(6, '0.048*"row" + 0.046*"list"')
+(13, '0.066*"product" + 0.059*"query"')
+(1, '0.065*"width" + 0.063*"color"')
+  ```
+
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
-  ```sh
-  npm install npm@latest -g
-  ```
+
 
 ### Installation
 
@@ -186,36 +205,11 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+## References
+The following sites were used as a reference during the creation of our project:
 
 
+* [LDA Topic Modelling With Gensim](https://predictivehacks.com/lda-topic-modelling-with-gensim/) 
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+Site #2
+* [abc](https://www.webpagefx.com/tools/emoji-cheat-sheet)
