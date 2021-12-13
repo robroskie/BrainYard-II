@@ -29,6 +29,7 @@ def result():
     print('csSim')
     print(csSim)
     return render_template("result.html", input = user_input, value1 = rs, value2 = csSim)
+    # return render_template("result.html", input = user_input, value1 = rs)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

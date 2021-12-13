@@ -193,7 +193,11 @@ closest_Q = list(enumerate(cosine_sim[0]))
 sorted_similar = sorted(closest_Q, key=lambda x:x[1], reverse=True)
 sorted_similar = sorted_similar[1:6]
 ```
+### Testing
+Test #1 <br>
+![unit_t1](https://user-images.githubusercontent.com/28748883/145751900-34f060e8-97f6-465a-bd80-99d6d57f6cbc.png)
 
+<<<<<<< HEAD
 ## Discussion 
 It is essential to note that the data was collected as posts type 1 (questions) post type 2 (answers) and comments. These three categories are related in that users posts questions, other users submit answers and both parties can comment as frequently under their own and others questions and answers. We look at question data to explain the topics with which users struggle the most, within this data we are able to extract yearly trends that forecast the popularity or need for help within certain subject areas of computer software. Answer and comment data are utilized to portrait a more in depth view of the sentiment and emotions towards a particular subject. 
 ### Questions
@@ -203,6 +207,19 @@ Using significant tags found within the corpus of most popular tags we are able 
 Since our answer data did not explicitly define tags of related content to classify each post, we began by creating our own analysis of the text. 
 
 ******* LUKE ADD HOW YOU EXTRACTED THE GENERAL TOPICS *******
+=======
+Test #2
+![unit_t2](https://user-images.githubusercontent.com/28748883/145751928-b24c9207-a9de-4a5a-909c-a627e7b9cfae.png)
+
+Test #3
+![unit_t3](https://user-images.githubusercontent.com/28748883/145751940-a6a192d1-5245-4e9d-b4d2-3f6ff4ee497b.png)
+
+Test #4
+![unit_t4](https://user-images.githubusercontent.com/28748883/145751959-a4f17962-e0a4-4173-b7e6-e8c904589664.png)
+
+Test #5
+![unit_T5](https://user-images.githubusercontent.com/28748883/145751969-7ca43c93-c075-4d24-89bc-524ecc9dd80a.png)
+>>>>>>> d3ed7ec32b7ac068d86a802206bfeaefc6af1c98
 
 The general topics found within answer responses are most often of the type HTML or TCP/IP domains. Through examination of the data we see that the top three types of content within answer responses was found to be HTML, TCP/IP Domains, and methods and variables. We wanted to identify who was answering questions the most and which of these individual accounts were the most positive of the entire set, these user accounts can be found in the dash board figure title: Top 10 User Accounts by Answers. An interesting detail was found upon creation of visualizations in that Answer data does not contain link type responses. The code used to generate labels for both answers and comments is identical and should classify under three categories, yet no response are found as link type within the answer data set. 
 
@@ -211,5 +228,3 @@ The following sites were used as a reference during the creation of our project:
 
 * [LDA Topic Modelling With Gensim](https://predictivehacks.com/lda-topic-modelling-with-gensim/) 
 
-Site #2
-* [abc](https://www.webpagefx.com/tools/emoji-cheat-sheet)
