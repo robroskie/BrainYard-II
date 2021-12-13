@@ -182,7 +182,7 @@ sorted_similar = sorted(closest_Q, key=lambda x:x[1], reverse=True)
 sorted_similar = sorted_similar[1:6]
 ```
 ### Testing
-Test #1
+Test #1 <br>
 ![unit_t1](https://user-images.githubusercontent.com/28748883/145751900-34f060e8-97f6-465a-bd80-99d6d57f6cbc.png)
 
 Test #2
