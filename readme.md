@@ -1,4 +1,10 @@
 <!-- ABOUT THE PROJECT -->
+# Introduction
+Stack Overflow has become one of the main sources students use to reference coding information and other related topics. The site provides publicly available data that we have chosen to subject to analysis. The data set was chosen as it provides a wealth of information surrounding the trending topics students or individuals in software development may ask. This set can also elucidate how users interact with each other and which users are most active. Our study of the data works to highlight the sentiment users show towards topics they ask questions about, or how they themselves contribute to other's discussions through comments or answers. 
+
+# Objective
+By examining data from Stack Overflow regarding questions, answers, and comments we can gather insight into the topics that have been causing individuals to flock to sites such as this, for help. The goal of this study is to accurately identify trending topics within user posts (Questions/Answers/Comments). We are also examining how users choose to respond and what attitudes they carry in their response. 
+
 ## About The Project
 For our project we scraped data from Stack Overflow and performed multiple analyses on it. Language processing was used to explore trends in the popularity of computer languages and topics, as well as to identify the sentiment of users, on Stack Overflow over time. <br>
 The second part of our project involved using Linear Discriminant and Cosine Similarity analysis to identify and predict the topics of user entered text and recommend similar questions.   
@@ -24,8 +30,11 @@ The following Python libraries were used in performing the language processing a
 
 
 ## Project part I - Language Analysis 
-This is an example of how you may give instructions on setting up your project locally.
 
+Post data was found to be significantly saturated with formatting characters, these and other character abnormalities were subject to preprocessing completed in the python script J.work/posts.py. We then apply a sentiment intensity analysis using the NLTK sentiment tool kit. This process examines the cleaned text and provides a score of positive/negative/neutral as a distribution between [0,1]. This analysis was completed on all data sets found in Data2/FinalData
+
+### Response Typing 
+We classify user responses as we believe different types of responses provide more significance within discussions. We begin to simply define the types as Code, Written or Link type responses. We perform a separate pre-processing script on our answer and comment data when identifying the response type.The code can be found in J.work/comDefs.py. This is due to the way we have chosen to classify the data, when the code found in method Comment_Type() encounters a http tag it automatically assigns the response type Link. We left special characters/operators that are most often used in code in the text data, we do this as to identify a cut-off percentage with which to distinguish code versus written responses. Since there are a few special characters that overlap between common written language and high level computer language we decided to 
 
 ## Project part II - Question and Topic Predictor
 ### Usage

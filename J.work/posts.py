@@ -395,7 +395,7 @@ def clean_tokenize( tag ):
 
 def generate_tag( df_tag ):
     '''
-    
+    Will generate tags for each of the dataframe in load_clean_Q
     '''
     #we intake a dirty tag, so clean it using clean_tokenize
     cleant = set( clean_tokenize( str(df_tag) ) )
@@ -415,6 +415,12 @@ def generate_tag( df_tag ):
 
 
 def load_clean_Q( dataF ):
+    '''
+    Load_clean_Q will take the existing question dataframe as an argument and will perform all cleaning and sentiment analysis on each row element found in the set, it will then combine the dataframes and return the set with sentiment analysis, clean text, and subject tag
+    
+    Arg: Question dataframe 
+    
+    '''
     from nltk.sentiment import SentimentIntensityAnalyzer
     sia = SentimentIntensityAnalyzer() 
     
