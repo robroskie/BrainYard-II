@@ -225,7 +225,7 @@ The LDA model implemented in the second part of our project was also used to ide
 The general topics found within answer responses are most often of the type HTML or TCP/IP domains. Through examination of the data we see that the top three types of content within answer responses was found to be HTML, TCP/IP Domains, and methods and variables. We wanted to identify who was answering questions the most and which of these individual accounts were the most positive of the entire set, these user accounts can be found in the dash board figure title: Top 10 User Accounts by Answers. An interesting detail was found upon creation of visualizations in that Answer data does not contain link type responses. The code used to generate labels for both answers and comments is identical and should classify under three categories, yet no response are found as link type within the answer data set. 
 
 ### Conclusion
-
+In the first part of the project where EDA was completed for the Stack Overflow dataset, there are various visualizations 
 
 ## References
 The following sites were used as a reference during the creation of our project:
