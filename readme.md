@@ -219,12 +219,13 @@ Using significant tags found within the corpus of most popular tags we are able 
 Since our answer data did not explicitly define tags of related content to classify each post, we began by creating our own analysis of the text. 
 
 ### Identification of General Topics
-The LDA model built in the second part of our project was also used to identify topics for each of the extracted answers in our dataset. This was done by iterating over the answers dataset and applying the second block of code within the applyLDAModel.py script. For the body text within each of the answers rows, the code would preprocess the text and then generate 3 topics using the LDA analysis. These were then appended to a new column within that dataframe.   
+The LDA model implemented in the second part of our project was also used to identify topics for each of the extracted answers in our dataset. This was done by iterating over the answers dataset and calling the prepareTextDf() function within the applyLDAModel.py script. For the body text within each of the answers rows, the code would preprocess the text and then generate 3 topics using the LDA analysis. These were then appended to a new column within that dataframe.   
 
 ### Analysis of the extracted topics 
 The general topics found within answer responses are most often of the type HTML or TCP/IP domains. Through examination of the data we see that the top three types of content within answer responses was found to be HTML, TCP/IP Domains, and methods and variables. We wanted to identify who was answering questions the most and which of these individual accounts were the most positive of the entire set, these user accounts can be found in the dash board figure title: Top 10 User Accounts by Answers. An interesting detail was found upon creation of visualizations in that Answer data does not contain link type responses. The code used to generate labels for both answers and comments is identical and should classify under three categories, yet no response are found as link type within the answer data set. 
 
 ### Conclusion
+
 
 ## References
 The following sites were used as a reference during the creation of our project:
