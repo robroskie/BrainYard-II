@@ -26,7 +26,9 @@ def getCSim(text):
     text_file = 'FinalData\qdata.csv'
 
     df = pd.read_csv(text_file, encoding='utf-8', low_memory=False)
-    df = df.head(5000)
+    
+    # Change this to how many questions you want the program to go over
+    df = df.head(20000)
 
     df = df[['Id', 'Text']]
     df = df[df['Text'].notna()]
